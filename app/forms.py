@@ -7,5 +7,5 @@ class SignupForm(forms.Form):
     
 class LoginForm(forms.Form):
     username = forms.CharField(label= "Usuário")
-    password1 = forms.CharField(label = "Senha", widget=forms.PasswordInput)
+    password = forms.CharField(label = "Senha", widget=forms.PasswordInput)
     

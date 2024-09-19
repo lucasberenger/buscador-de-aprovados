@@ -1,22 +1,38 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 
-<form method="POST" action="{% url 'login' %}"></form>
-    {% csrf_token %}
-    
-    {% for field in form %}
-        <b>{{ field.label }}</b>: {{ field }}
-        <br><br>
-    {% endfor %}
+<div class="container d-flex align-items-center justify-content-center min-vh-100">
+    <div class="row w-100">
+        <div class="col-md-6 col-lg-4 mx-auto">
+            <!-- Card para centralizar a logo e o formulário -->
+            <div class="card shadow">
+                <div class="card-body">
+                    <!-- Logo da Empresa -->
+                    <div class="text-center mb-4">
+                        <img src="{% static 'images/logo.png' %}" alt="Logo da Empresa" class="img-fluid" style="max-width: 150px;">
+                    </div>
 
-    {% if error %}
-        <span style="color: red;">{{ error }}</span>
-        <br><br>
-    {% endif %}
-    
-    <input type="submit" value="Enviar" />
-</form>
-
-
-{% endblock %}
+                    <!-- Formulário de Login -->
+                    <h5 class="card-title text-center mb-4">Login</h5>
+                    <form method="post" action="{% url 'login' %}" class="d-flex flex-column align-items-center">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                                <label class="form-label mb-2">{{ form.username.label }}</label>
+                                <p> {{ form.username }}</p>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label mb-2">{{ form.password.label }}</label>
+                            <p> {{ form.password }}</p>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary" style="background-color:#173B82;">Entrar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}                
