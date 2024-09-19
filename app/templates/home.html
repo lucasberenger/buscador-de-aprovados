@@ -2,6 +2,42 @@
 
 {% block content %}
 
-<h1>Hello, {{ request.user.username }}</h1>
+<div class="m-5">
+    <h1 class="h1">Bem-vindo, {{ request.user.username }}</h1>
+</div>
+
+<div class="container">
+    <h2 class="h2">Candidatos</h2>
+    {% if candidatos %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>CPF</th>
+                <th>Status</th>
+                <th>Data de Aprovação</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for candidato in candidatos %}
+                <tr>
+                    <td>{{ candidato.name }}</td>
+                    <td>{{ candidato.cpf }}</td>
+                    {% if candidato.status == 'aprovado' %}
+                        <td class="fw-bold text-success">{{ candidato.get_status_display }}</td>
+                    {% elif candidato.status == 'reprovado' %}
+                        <td class="fw-bold text-danger">{{ candidato.get_status_display }}</td>
+                    {% else %}
+                        <td class="fw-bold text-info">{{ candidato.get_status_display }}</td>
+                    {% endif %}
+                    <td>{% if candidato.approval_date %}{{ candidato.approval_date }}{% else %}N/A{% endif %}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>Nenhum candidato encontrado.</p>
+{% endif %}
+</div>
 
 {% endblock %}

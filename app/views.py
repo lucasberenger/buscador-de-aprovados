@@ -6,7 +6,21 @@ from .forms import SignupForm, LoginForm
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import Candidato
 # Create your views here.
+
+
+## HomeView do projeto
+class HomeView(LoginRequiredMixin, View):
+    
+    def get(self, request):
+        candidatos = Candidato.objects.all()
+        data = { 
+            'user': request.user,
+            'candidatos': candidatos,
+        }
+        return render(request,'home.html', data)
+
 
 ## View para Cadastro de Usuário
 class SignupView(View):
@@ -74,9 +88,3 @@ class LogoutView(LoginRequiredMixin, View):
         logout(request)
         return HttpResponseRedirect(reverse('login'))
 
-## HomeView do projeto
-class HomeView(LoginRequiredMixin, View):
-    
-    def get(self, request):
-        data = { 'user': request.user }
-        return render(request,'home.html', data)
