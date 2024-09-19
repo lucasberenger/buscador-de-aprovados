@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form method="POST" action="{% url 'login' %}"></form>
+    {% csrf_token %}
+    
+    {% for field in form %}
+        <b>{{ field.label }}</b>: {{ field }}
+        <br><br>
+    {% endfor %}
+
+    {% if error %}
+        <span style="color: red;">{{ error }}</span>
+        <br><br>
+    {% endif %}
+    
+    <input type="submit" value="Enviar" />
+</form>
+
+
+{% endblock %}
