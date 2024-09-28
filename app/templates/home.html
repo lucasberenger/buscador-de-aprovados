@@ -7,6 +7,20 @@
 </div>
 
 <div class="container">
+    <h2 class="h2">Buscar Candidatos</h2>
+    <form method="POST" action="{% url 'home' %}" class="d-flex flex-column align-items-center">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label class="form-label mb-2">{{ form.fullname.label }}</label>
+            <p> {{ form.fullname }}</p>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn text-white" style="background-color:#173B82;">Buscar</button>
+        </div>
+    </form>
+</div>
+
+<div class="container">
     <h2 class="h2">Candidatos</h2>
     {% if candidatos %}
     <table class="table table-striped">
