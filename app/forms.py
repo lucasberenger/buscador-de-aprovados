@@ -9,3 +9,5 @@ class LoginForm(forms.Form):
     username = forms.CharField(label= "Usuário")
     password = forms.CharField(label = "Senha", widget=forms.PasswordInput)
     
+class SearchNameForm(forms.Form):
+    fullname = forms.CharField(label="Nome e Sobrenome do Candidato")
