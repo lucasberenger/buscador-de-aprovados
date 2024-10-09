@@ -14,39 +14,23 @@ def web_search(fullname) -> str:
 
     driver.get('https://www.gov.br/imprensanacional/pt-br')
 
-    # driver.implicitly_wait(15)
+    driver.implicitly_wait(15)
     try:
-        print("Esperando pop_up...")
 
-        wait_pop_up = WebDriverWait(driver, 20).until(
-            EC.visibility_of_element_located((By.XPATH, '//*[@id="govbr-login-overlay-wrapper"]'))
-        )
-
-        print("Popup encontrado")
-        
-        WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((By.XPATH, '//*[@id="govbr-login-overlay-wrapper"]'))
-        )
-
-        close_pop_up = driver.find_element('xpath', '//*[@id="govbr-login-overlay-wrapper"]')
+        close_pop_up = driver.find_element(By.TAG, 'body')
         close_pop_up.click()
-        print("pop_up fechado!")
         
-        search_box = driver.find_element('xpath', '//*[@id="search-bar"]') 
-        search_box.send_keys(fullname)
-        search_box.submit()
+        # Seleciona o iframe do buscador
+        iframe = driver.find_element(By.ID, 'buscadou-iframe')
+        driver.switch_to.frame(iframe)
+    
+        
+        search_bar = driver.find_element(By.XPATH, '//*[@id="search-bar"]') 
+        search_bar.send_keys(fullname)
+        search_bar.submit()
 
     except Exception as e:
         print(e)
     
     finally:
         driver.quit()
-
-
-# close_login = driver.find_element(By.ID, 'govbr-login-overlay-wrapper')
-    # close_login = driver.find_element('xpath', '//*[@id="sso-status-bar"]/div[2]/div[1]')
-    # close_login.click()
-
-    # search_box = driver.find_element('xpath', '//*[@id="search-bar"]') 
-    # search_box.send_keys(fullname)
-    # search_box.submit()
