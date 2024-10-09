@@ -4,8 +4,7 @@ class Candidato(models.Model):
 
     STATUS_CHOICES = (
         ("pendente", "Pendente"),
-        ("aprovado", "Aprovado"),
-        ("reprovado", "Reprovado"),
+        ("encontrado", "Encontrado"),
     )
 
     name = models.CharField(max_length=100)

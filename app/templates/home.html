@@ -37,10 +37,8 @@
                 <tr>
                     <td>{{ candidato.name }}</td>
                     <td>{{ candidato.cpf }}</td>
-                    {% if candidato.status == 'aprovado' %}
+                    {% if candidato.status == 'encontrado' %}
                         <td class="fw-bold text-success">{{ candidato.get_status_display }}</td>
-                    {% elif candidato.status == 'reprovado' %}
-                        <td class="fw-bold text-danger">{{ candidato.get_status_display }}</td>
                     {% else %}
                         <td class="fw-bold text-info">{{ candidato.get_status_display }}</td>
                     {% endif %}

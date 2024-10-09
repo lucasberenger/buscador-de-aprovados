@@ -10,7 +10,7 @@ class CandidatoTestCase(TestCase):
         Candidato.objects.create(
             name="José Eduardo Silva",
             cpf="12345678910",
-            status="aprovado",
+            status="encontrado",
             approval_date=date(2024, 8, 8)
         )
         Candidato.objects.create(
@@ -24,7 +24,7 @@ class CandidatoTestCase(TestCase):
         candidato1 = Candidato.objects.get(name="José Eduardo Silva")
         candidato2 = Candidato.objects.get(name="Maria Elvira Santos")
 
-        self.assertEqual(candidato1.status, 'aprovado')
+        self.assertEqual(candidato1.status, 'encontrado')
         self.assertEqual(candidato2.status, 'pendente')
         
         self.assertEqual(candidato1.approval_date, date(2024, 8, 8))
