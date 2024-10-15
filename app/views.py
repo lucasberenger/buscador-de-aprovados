@@ -1,10 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
 from django.urls import reverse
 from django.http import HttpResponseRedirect
-from .forms import SignupForm, LoginForm, SearchNameForm
+from .forms import SignupForm, LoginForm, SearchNameForm, EditProfileForm
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Candidato
 # Create your views here.
@@ -98,3 +98,37 @@ class LogoutView(LoginRequiredMixin, View):
         logout(request)
         return HttpResponseRedirect(reverse('login'))
 
+
+## View para visualizar Perfil do usuário
+class ProfileView(LoginRequiredMixin, View):
+    def get(self, request):
+        user = request.user
+        data = {
+            'user': user,
+        }
+
+        return render(request, 'profile.html', data)
+
+## View para editar o Perfil do Usuário
+class EditProfileView(LoginRequiredMixin, View):
+    def get(self, request):
+        form = EditProfileForm(instance=request.user)
+
+        data = {
+            'form': form,
+        }
+        return render(request, 'edit_profile.html', data)
+
+    def post(self, request):
+        form = EditProfileForm(request.POST, instance=request.user)
+
+        if form.is_valid():
+            form.save()
+
+            return redirect('profile')
+
+        data = {
+            'form': form,
+        }
+
+        return render(request, 'edit_profile.html', data)
