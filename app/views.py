@@ -7,7 +7,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Candidato
-from .utils import web_search
 # Create your views here.
 
 
@@ -15,40 +14,21 @@ from .utils import web_search
 class HomeView(LoginRequiredMixin, View):
     
     def get(self, request):
-        candidatos = Candidato.objects.all()
+        queryset = Candidato.objects.all()
+        name = request.GET.get('fullname')
         form = SearchNameForm()
+
+        if name:
+            queryset = Candidato.objects.all().filter(name__icontains=name)
+
+
         data = { 
             'user': request.user,
-            'candidatos': candidatos,
+            'candidatos': queryset,
             'form': form,
+            'name': name,
         }
-        return render(request,'home.html', data)
-    
-    def post(self, request):
-        candidatos = Candidato.objects.all()
-        form = SearchNameForm(data=request.POST)
-
-        if form.is_valid():
-            fullname = form.cleaned_data.get('fullname')
-
-            try:
-                web_search(fullname)
-            except ValueError as ve:
-                print(f"error {ve}")
-                error_message = str(ve)
-            except Exception as e:
-                print(f"error {e}")
-                error_message = "Ocorreu um erro inesperado"
-        
-
-
-        data = {
-            'candidatos': candidatos,
-            'form': form,
-            'error': 'Ocorreu um erro.',
-        }
-
-        return render(request, 'home.html', data)
+        return render(request,'home.html', data)       
 
 
 
