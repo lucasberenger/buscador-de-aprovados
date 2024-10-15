@@ -5,25 +5,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.png' %}">
-    <title>Buscador</title>
+    <title>Múltipla Difusão do Conhecimento</title>
     {% load bootstrap5 %}
     {% bootstrap_css %}
     {% bootstrap_javascript %}
+    <style>
+        body {
+         display: flex;
+         flex-direction: column;
+         min-height: 100vh;   
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .navbar-nav .nav-link {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" style="background-color: 173b82;">
-            <a class="navbar-brand" href="#">Múltipla Difusão do Conhecimento</a>
+        <nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top" style="background-color: #173b82;">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Início <span class="sr-only">(atual)</span></a>
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Candidatos
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Adicionar Candidatos</a>
+                            <a class="dropdown-item" href="#">Editar Candidatos</a>
+                        </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Recursos</a>
+                        <a class="nav-link" href="#">Perfil</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'logout' %}">Sair</a>
@@ -31,19 +55,20 @@
                 </ul>
             </div>
         </nav>
+        
     </header>
   
         {% block content %}
         {% endblock %}
     
-    <!-- <footer class="text-muted py-5">
+    <footer class="text-muted py-5">
         <div class="container">
             <p class="float-right">
                 <a href="#">Voltar ao topo</a>
             </p>
             <p>&copy; 2024 Múltipla Difusão do Conhecimento. Todos os direitos reservados.</p>
         </div>
-    </footer> -->
+    </footer>
 </body>
 </html>
 
