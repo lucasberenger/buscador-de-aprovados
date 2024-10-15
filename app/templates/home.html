@@ -26,6 +26,7 @@
                 <th>Nome</th>
                 <th>CPF</th>
                 <th>Status</th>
+                <th>Detalhes</th>
             </tr>
         </thead>
         <tbody>
@@ -38,6 +39,9 @@
                     {% else %}
                         <td class="fw-bold text-info">{{ candidato.get_status_display }}</td>
                     {% endif %}
+                    <td>
+                        <a href="{% url 'candidato_detail' candidato.pk %}" class="btn btn-info">Ver Detalhes</a>
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>

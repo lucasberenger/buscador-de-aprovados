@@ -1,10 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from .forms import SignupForm, LoginForm, SearchNameForm, EditProfileForm
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Candidato
 # Create your views here.
@@ -132,3 +132,12 @@ class EditProfileView(LoginRequiredMixin, View):
         }
 
         return render(request, 'edit_profile.html', data)
+
+## View para exibir detalhes dos Candidatos
+class DetailsView(LoginRequiredMixin, View):
+    def get(self, request, pk):
+        candidato = get_object_or_404(Candidato, pk=pk)
+        data = {
+            'candidato': candidato,
+        }
+        return render(request, 'details.html', data)
