@@ -3,22 +3,26 @@
 {% block content %}
 
 <main class="d-flex flex-column gap-5">
-    <div class="row align-items-center">
+    <div class="row align-items-center mt-5">
           <form method="GET" action="{% url 'home' %}" class="d-flex flex-column align-items-center gap-2">
               {% csrf_token %}
               <h2>Buscar Candidato</h2>
-              <div class="mb-3">
+              <div class="m-3">
                   <p> {{ form.fullname }}</p>
               </div>
               <div class="text-center">
-                  <button type="submit" class="btn btn-primary text-white">Buscar</button>
+                  <button type="submit" class="btn btn-primary text-white">Buscar<i class="fa-solid fa-magnifying-glass ms-2"></i></button>
                   <a href="{% url 'home' %}" class="btn btn-primary text-white">Mostrar Todos</a>                  
               </div>
           </form>
     </div>
 
     <div class="container-lg">
-    <h2 class="h2">Lista de Candidatos</h2>
+        <div class="d-flex justify-content-between mb-2">
+            <h2 class="h2">Lista de Candidatos</h2>
+            <button class="btn btn-success"><a class="text-decoration-none text-white" href="{% url 'create_candidato' %}">Adicionar Candidatos<i class="fa-solid fa-user-plus ms-2"></i></a></button>
+        </div>
+    
 {% if candidatos %}
     <table class="table table-striped table-bordered">
         <thead>
@@ -35,13 +39,13 @@
                     <td>{{ candidato.name }}</td>
                     <td>{{ candidato.cpf }}</td>
                     {% if candidato.status == 'encontrado' %}
-                        <td class="fw-bold text-success">{{ candidato.get_status_display }}</td>
+                        <td class="fw-bold text-success">{{ candidato.get_status_display }}<i class="fa-solid fa-user-check ms-2"></i></td>
                     {% else %}
                         <td class="fw-bold text-info">{{ candidato.get_status_display }}</td>
                     {% endif %}
                     <td>
                         <a href="{% url 'candidato_detail' candidato.pk %}"><i class="fa-solid fa-folder-open m-2" title="Ver Detalhes"></i></a>
-                        <a href="{% url 'edit_candidato' candidato.pk %}"><i class="fa-solid fa-pen-to-square m-2" title="Editar Candidato"></i></a>
+                        <a href="{% url 'edit_candidato' candidato.pk %}"><i class="fa-solid fa-user-pen m-2" title="Editar Candidato"></i></a>
                     </td>
                 </tr>
             {% endfor %}
