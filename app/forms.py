@@ -27,3 +27,7 @@ class EditProfileForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+
+class CreateCandidatoForm(forms.Form):
+    fullname = forms.CharField(label="Nome", max_length=100)
+    cpf = forms.CharField(max_length=11)

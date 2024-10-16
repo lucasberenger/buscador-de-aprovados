@@ -41,7 +41,7 @@
                     {% endif %}
                     <td>
                         <a href="{% url 'candidato_detail' candidato.pk %}"><i class="fa-solid fa-folder-open m-2" title="Ver Detalhes"></i></a>
-                        <a href="{% url 'candidato_detail' candidato.pk %}"><i class="fa-solid fa-pen-to-square m-2" title="Editar Candidato"></i></a>
+                        <a href="{% url 'edit_candidato' candidato.pk %}"><i class="fa-solid fa-pen-to-square m-2" title="Editar Candidato"></i></a>
                     </td>
                 </tr>
             {% endfor %}
