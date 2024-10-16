@@ -2,12 +2,14 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.urls import reverse
 from django.http import HttpResponseRedirect
-from .forms import SignupForm, LoginForm, SearchNameForm, EditProfileForm, CreateCandidatoForm
+from .forms import SignupForm, LoginForm, SearchNameForm, EditProfileForm, CreateCandidatoForm, UploadXlsForm
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Candidato
+from .utils import add_candidatos_from_xls
 # Create your views here.
 
 
@@ -22,6 +24,9 @@ class HomeView(LoginRequiredMixin, View):
         if name:
             queryset = Candidato.objects.all().filter(name__icontains=name)
 
+
+        paginator = Paginator(queryset, 10)
+        page_number = request.GET.get('page')
 
         data = { 
             'user': request.user,
@@ -147,15 +152,16 @@ class DetailsView(LoginRequiredMixin, View):
 class CreateCandidatoView(LoginRequiredMixin, View):
     def get(self, request):
         form = CreateCandidatoForm()
-
+        upload_form = UploadXlsForm()
         data = { 
             'form': form,
+            'upload_form': upload_form,
         }
 
         return render(request, 'create_candidato.html', data)
 
     def post(self, request):
-        form = CreateCandidatoForm(data=request.POST)
+        form = CreateCandidatoForm(request.POST)
 
         if form.is_valid():
             fullname = form.cleaned_data.get('fullname')
@@ -165,9 +171,24 @@ class CreateCandidatoView(LoginRequiredMixin, View):
                 name=fullname,
                 cpf=cpf,
             )
+
+            return redirect('home')
+
+        if 'upload_file' in request.POST:
+            upload_form = UploadXlsForm(request.POST, request.FILES)
+
+            if upload_form.is_valid():
+                archive = upload_form.cleaned_data.get('archive')
+                if archive:
+                    add_candidatos_from_xls(archive)
+
+            return redirect('home')
         
+        form = CreateCandidatoForm(request.POST)
+
         data = {
             'form': form,
+            'upload_form': upload_form,
         }
 
         return render(request, 'home.html', data)

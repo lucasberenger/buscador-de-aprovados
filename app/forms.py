@@ -29,5 +29,8 @@ class EditProfileForm(forms.ModelForm):
         return user
 
 class CreateCandidatoForm(forms.Form):
-    fullname = forms.CharField(label="Nome", max_length=100)
-    cpf = forms.CharField(max_length=11)
+    fullname = forms.CharField(label="Nome", max_length=100, required=True)
+    cpf = forms.CharField(label="CPF", max_length=11, required=True)
+
+class UploadXlsForm(forms.Form):
+    archive = forms.FileField(label="Se preferir, você pode adicionar via planilha EXCEL",required=False)
