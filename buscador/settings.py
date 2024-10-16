@@ -1,5 +1,8 @@
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -9,7 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-p#8u4xtebdd@-@31=ur5m@9&$d2!*&7dnldum4r3$+!l+@z%9s'
+SECRET_KEY = os.getenv("SECRET_KEY", default="")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -74,10 +77,20 @@ WSGI_APPLICATION = 'buscador.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('DATABASE_NAME', default=''),
+        'USER': os.getenv('DATABASE_USER', default=''),
+        'PASSWORD': os.getenv('DATABASE_PASSWORD', default=''),
+        'HOST': os.getenv('DATABASE_HOST', default=''),
+        'PORT': os.getenv('DATABASE_PORT', default=''),
     }
 }
 
