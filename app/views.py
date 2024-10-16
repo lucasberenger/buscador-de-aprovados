@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
+from django.views.generic import ListView
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from .forms import SignupForm, LoginForm, SearchNameForm, EditProfileForm, CreateCandidatoForm, UploadXlsForm
@@ -14,27 +15,27 @@ from .utils import add_candidatos_from_xls
 
 
 ## HomeView do projeto
-class HomeView(LoginRequiredMixin, View):
+class HomeView(LoginRequiredMixin, ListView):
     
-    def get(self, request):
-        queryset = Candidato.objects.all()
-        name = request.GET.get('fullname')
-        form = SearchNameForm()
+    model = Candidato
+    template_name = 'home.html'
+    context_object_name = 'candidatos'
+    paginate_by = 15
+
+    def get_queryset(self):
+        queryset = super().get_queryset() 
+        name = self.request.GET.get('fullname')  
 
         if name:
-            queryset = Candidato.objects.all().filter(name__icontains=name)
+            queryset = queryset.filter(name__icontains=name)
 
+        return queryset
 
-        paginator = Paginator(queryset, 10)
-        page_number = request.GET.get('page')
-
-        data = { 
-            'user': request.user,
-            'candidatos': queryset,
-            'form': form,
-            'name': name,
-        }
-        return render(request,'home.html', data)       
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = SearchNameForm()
+        context['name'] = self.request.GET.get('fullname')
+        return context   
 
 
 
