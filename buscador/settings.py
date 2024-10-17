@@ -15,9 +15,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("SECRET_KEY", default="")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DEBUG", 'Flase') == 'True'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
 
 
 # Application definition
@@ -63,13 +63,8 @@ TEMPLATES = [
     },
 ]
 
+STATIC_ROOT = '/static/'
 STATIC_URL = '/static/'
-
-
-# STATICFILES_DIRS = [
-#     BASE_DIR / 'static'
-# ]
-
 
 WSGI_APPLICATION = 'buscador.wsgi.application'
 
@@ -77,22 +72,22 @@ WSGI_APPLICATION = 'buscador.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DATABASE_NAME', default=''),
-        'USER': os.getenv('DATABASE_USER', default=''),
-        'PASSWORD': os.getenv('DATABASE_PASSWORD', default=''),
-        'HOST': os.getenv('DATABASE_HOST', default=''),
-        'PORT': os.getenv('DATABASE_PORT', default=''),
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': os.getenv('DATABASE_NAME', default=''),
+#         'USER': os.getenv('DATABASE_USER', default=''),
+#         'PASSWORD': os.getenv('DATABASE_PASSWORD', default=''),
+#         'HOST': os.getenv('DATABASE_HOST', default=''),
+#         'PORT': os.getenv('DATABASE_PORT', default=''),
+#     }
+# }
 
 
 # Password validation
