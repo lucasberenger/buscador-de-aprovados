@@ -46,13 +46,13 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
 ]
 
-# CORS_ALLOWED_ORIGINS = os.getenv('CORS_ALLOWED_ORIGINS').split(',')
+CORS_ALLOWED_ORIGINS = os.getenv('CORS_ALLOWED_ORIGINS').split(',')
 
-# CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS').split(',')
+CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS').split(',')
 
-CORS_ALLOWED_ORIGINS = ['http://localhost', 'http://127.0.0.1', 'http://52.91.112.223']
+# CORS_ALLOWED_ORIGINS = ['http://localhost', 'http://127.0.0.1', 'http://52.91.112.223']
 
-CSRF_TRUSTED_ORIGINS = ['http://localhost', 'http://127.0.0.1', 'http://52.91.112.223']
+# CSRF_TRUSTED_ORIGINS = ['http://localhost', 'http://127.0.0.1', 'http://52.91.112.223']
 
 
 ROOT_URLCONF = 'buscador.urls'
@@ -84,22 +84,22 @@ WSGI_APPLICATION = 'buscador.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': os.getenv('DATABASE_NAME', default=''),
-#         'USER': os.getenv('DATABASE_USER', default=''),
-#         'PASSWORD': os.getenv('DATABASE_PASSWORD', default=''),
-#         'HOST': os.getenv('DATABASE_HOST', default=''),
-#         'PORT': os.getenv('DATABASE_PORT', default=''),
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('DATABASE_NAME', default=''),
+        'USER': os.getenv('DATABASE_USER', default=''),
+        'PASSWORD': os.getenv('DATABASE_PASSWORD', default=''),
+        'HOST': os.getenv('DATABASE_HOST', default=''),
+        'PORT': os.getenv('DATABASE_PORT', default=''),
+    }
+}
 
 
 # Password validation
