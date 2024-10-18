@@ -50,9 +50,9 @@ MIDDLEWARE = [
 
 # CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS').split(',')
 
-CORS_ALLOWED_ORIGINS = ['localhost', '127.0.0.1', '52.91.112.223']
+CORS_ALLOWED_ORIGINS = ['http://localhost', 'http://127.0.0.1', 'http://52.91.112.223']
 
-CSRF_TRUSTED_ORIGINS = ['localhost', '127.0.0.1', '52.91.112.223']
+CSRF_TRUSTED_ORIGINS = ['http://localhost', 'http://127.0.0.1', 'http://52.91.112.223']
 
 
 ROOT_URLCONF = 'buscador.urls'
