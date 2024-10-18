@@ -7,3 +7,4 @@ pandas==2.2.3
 selenium==4.25.0 
 django-bootstrap-v5
 gunicorn
+django-cors-headers
