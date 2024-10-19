@@ -50,10 +50,6 @@ CORS_ALLOWED_ORIGINS = os.getenv('CORS_ALLOWED_ORIGINS').split(',')
 
 CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS').split(',')
 
-# CORS_ALLOWED_ORIGINS = ['http://localhost', 'http://127.0.0.1', 'http://52.91.112.223']
-
-# CSRF_TRUSTED_ORIGINS = ['http://localhost', 'http://127.0.0.1', 'http://52.91.112.223']
-
 
 ROOT_URLCONF = 'buscador.urls'
 
@@ -90,6 +86,7 @@ WSGI_APPLICATION = 'buscador.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
