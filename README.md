@@ -14,6 +14,9 @@ O objetivo deste projeto é automatizar o processo de visita e análise dos diá
 
 ## Tecnologias Utilizadas
 
-- **Linguagem de Programação**: 
-- **Banco de Dados**: 
-- **Cloud**: 
+- **Linguagens de Programação e Frameworks**: HTML - CSS - JavaScript - Bootstrap - Python - Django - Selenium
+- **Banco de Dados**: PostgreSQL
+- **Cloud e DevOps**: AWS (vpc, ec2, route 53) - Docker - Nginx - Cronjobs
+
+## Imagens do projeto
+
