@@ -20,7 +20,7 @@ O objetivo deste projeto é automatizar o processo de visita e análise dos diá
 
 ![login-page](https://github.com/user-attachments/assets/6948eeb4-080a-46de-96d7-8135427fa2aa)
 
-![main_vazia](https://github.com/user-attachments/assets/edbf3854-e267-405b-be82-9c35c364472e)
+![main](![image](https://github.com/user-attachments/assets/3c58af25-0921-4bdf-bbac-110643ae1fe1)
 
 ![add_candidato_page](https://github.com/user-attachments/assets/45bb5a09-ac66-4500-b221-225dd1e0fe35)
 
