@@ -14,7 +14,11 @@ O objetivo deste projeto é automatizar o processo de visita e análise dos diá
 
 - **Linguagens de Programação e Frameworks**: HTML - CSS - JavaScript - Bootstrap - Python - Django - Selenium
 - **Banco de Dados**: PostgreSQL
-- **Cloud e DevOps**: AWS (vpc, ec2, route 53) - Docker - Nginx - Cronjobs
+- **Cloud e DevOps**: AWS (VPC, EC-2, Route 53) - Docker - Nginx - Cronjobs
+
+## Aplicação Live
+
+Acesse a aplicação clicando [aqui](http://buscadormultipla.com.br/). Utilize o usuário **demo** e a senha **demo123** para logar no sistema.
 
 ## Imagens do projeto
 
